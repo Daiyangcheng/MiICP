@@ -1,0 +1,35 @@
+server:
+  port: 8080
+spring:
+  mail:
+    host: mx.example.com
+    port: 465
+    username: admin@example.com
+    password: 1145141919810
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+            required: true
+          auth: true
+  application:
+    name: MiICP
+  datasource:
+    url: jdbc:postgresql://1.14.51.4:5432/homo
+    username: homo
+    password: 114514
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: POSTGRESQL
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
