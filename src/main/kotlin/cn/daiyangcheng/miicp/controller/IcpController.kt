@@ -4,7 +4,6 @@ import cn.daiyangcheng.miicp.annotation.Limit
 import cn.daiyangcheng.miicp.service.ApplicationService
 import cn.daiyangcheng.miicp.service.EmailService
 import cn.daiyangcheng.miicp.service.IcpNumService
-import cn.daiyangcheng.miicp.type.IcpNumType
 import cn.daiyangcheng.miicp.utils.ResponseBuilder
 import jakarta.annotation.Resource
 import org.springframework.http.ResponseEntity

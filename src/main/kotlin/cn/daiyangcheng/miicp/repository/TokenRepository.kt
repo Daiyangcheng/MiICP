@@ -7,8 +7,6 @@ import org.springframework.data.jpa.repository.Query
 import java.time.Instant
 
 interface TokenRepository : JpaRepository<TokenType, Long> {
-    fun findByToken(token: String): TokenType?
-    
     @Query("SELECT t FROM TokenType t WHERE t.token = ?1 AND t.expiresAt > ?2")
     fun findByTokenAndNotExpired(token: String, now: Instant): TokenType?
     
