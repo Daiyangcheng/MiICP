@@ -83,7 +83,7 @@ class IcpController {
             return builder.badRequest(message = "验证码错误")
         }
 
-        if (icpNumService.findByNum(num) != null) return builder.forbidden("该备案号已被使用")
+        if (icpNumService.findByNum(num)?.email != null) return builder.forbidden("该备案号已被使用")
         val applicationType = applicationService.findByNum(num)
         // 存在且没被拒绝都能用
         if (applicationType != null && applicationType.status != "REJECTED") return builder.forbidden("该备案号已被使用")

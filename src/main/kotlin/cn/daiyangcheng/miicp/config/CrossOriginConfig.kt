@@ -20,15 +20,11 @@ class CrossOriginConfig : Filter {
         val request: HttpServletRequest? = req as? HttpServletRequest
         val response: HttpServletResponse? = res as? HttpServletResponse
 
-        val origin: String? = request?.getHeader("Origin")
-
-        if (origin != null) chain?.doFilter(req, res)
-
         if (request?.method?.contains("OPTIONS") ?: false) {
             response?.status = HttpServletResponse.SC_OK;
             return;
         }
-        response?.setHeader("Access-Control-Allow-Origin", origin)
+        response?.setHeader("Access-Control-Allow-Origin", "*")
         response?.setHeader("Access-Control-Allow-Credentials", "true")
         response?.setHeader("Access-Control-Allow-Methods", "*")
         response?.setHeader("Access-Control-Max-Age", "3600")
