@@ -76,18 +76,35 @@ class IcpController {
         @RequestParam("name") name: String,
         @RequestParam("domain") domain: String,
         @RequestParam("description") description: String?,
-        @RequestParam("code") code: String
+        @RequestParam("code") code: String,
+        @RequestParam("num") num: String
     ): ResponseEntity<Map<String, Any?>> {
         if (!emailService.verifyCode(email, code)) {
             return builder.badRequest(message = "验证码错误")
         }
+
+        if (icpNumService.findByNum(num) != null) return builder.forbidden("该备案号已被使用")
+        val applicationType = applicationService.findByNum(num)
+        // 存在且没被拒绝都能用
+        if (applicationType != null && applicationType.status != "REJECTED") return builder.forbidden("该备案号已被使用")
         
         val application = applicationService.createApplication(
             email = email,
             name = name,
             domain = domain,
-            description = description
+            description = description,
+            num = num
         )
         return builder.success(data = builder.toMap(application))
+    }
+
+    @GetMapping("/icp/{num}")
+    fun getIcp(@PathVariable("num") num: String): ResponseEntity<Map<String, Any?>> {
+        val icpNum = icpNumService.findByNum(num)
+        return if (icpNum != null) {
+            if (icpNum.email.isNullOrEmpty()) builder.notFound("该备案号未被使用") else builder.success(data = builder.toMap(icpNum))
+        } else {
+            builder.notFound("ICP 不存在")
+        }
     }
 }

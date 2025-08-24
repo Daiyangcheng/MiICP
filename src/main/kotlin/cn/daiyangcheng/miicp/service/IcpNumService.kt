@@ -10,6 +10,7 @@ interface IcpNumService {
     fun update(icpNumType: IcpNumType)
     fun delete(icpNumType: IcpNumType)
     fun findAll(): List<IcpNumType>
+    fun findByNum(num: String): IcpNumType?
     fun initializeNewYearNumbers(year: Int)
     fun findCurrentYearActive(pageable: Pageable): Page<IcpNumType>
 }

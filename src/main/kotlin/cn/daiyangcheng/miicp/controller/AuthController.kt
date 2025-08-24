@@ -16,8 +16,11 @@ class AuthController {
     private var builder: ResponseBuilder = ResponseBuilder()
 
     @PostMapping("/login")
-    fun login(@RequestBody request: LoginRequest): ResponseEntity<Map<String, Any?>> {
-        val token = authService.login(request.username, request.password)
+    fun login(
+        @RequestParam("username") username: String,
+        @RequestParam("password") password: String
+    ): ResponseEntity<Map<String, Any?>> {
+        val token = authService.login(username, password)
         return if (token != null) {
             data class Response(val token: String)
             builder.success(data = builder.toMap(Response(token)), message = "登录成功")
@@ -25,9 +28,4 @@ class AuthController {
             builder.badRequest(message = "用户名或密码错误")
         }
     }
-
-    data class LoginRequest(
-        val username: String,
-        val password: String
-    )
 }

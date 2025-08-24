@@ -5,8 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
+import java.util.Optional
 
 interface IcpNumRepository : JpaRepository<IcpNumType, Long> {
     @Query("SELECT i FROM IcpNumType i WHERE i.num LIKE ?1% AND i.active = true")
     fun findByYearAndActive(yearPrefix: String, pageable: Pageable): Page<IcpNumType>
+    fun findByNum(num: String): Optional<IcpNumType?>
 }

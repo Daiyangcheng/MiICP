@@ -28,6 +28,10 @@ class IcpNumServiceImpl : IcpNumService {
         return icpNumRepository.findAll()
     }
 
+    override fun findByNum(num: String): IcpNumType? {
+        return icpNumRepository.findByNum(num).orElse(null)
+    }
+
     override fun initializeNewYearNumbers(year: Int) {
         val startNum = year * 10000
         val endNum = startNum + 9999

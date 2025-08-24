@@ -41,4 +41,12 @@ open class IcpNumType {
     @ColumnDefault("NULL")
     @Column(name = "description")
     open var description: String? = null
+
+    @ColumnDefault("NULL")
+    @Column(name = "domain")
+    open var domain: String? = null
+
+    @ColumnDefault("NULL")
+    @Column(name = "name")
+    open var name: String? = null
 }

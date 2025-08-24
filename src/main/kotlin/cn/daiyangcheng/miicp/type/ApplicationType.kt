@@ -33,4 +33,7 @@ open class ApplicationType {
     @ColumnDefault("'PENDING'")
     @Column(name = "status", nullable = false)
     open var status: String? = "PENDING"
+    @Column(name = "num", nullable = false)
+    open var num: String? = null
+
 }
